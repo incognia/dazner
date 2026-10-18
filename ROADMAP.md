@@ -1,8 +1,10 @@
 # Hoja de ruta
 
-*Última modificación: 18 de octubre de 2026, 15:40 (CST)*
+*Última modificación: 18 de octubre de 2026, 15:53 (CST)*
 
 DAZNer hoy existe solo para macOS. Esta hoja de ruta describe cómo reorganizar el repositorio y llevar el mismo visor a Windows y a Linux (GTK y Qt), sin perder lo que lo hace útil: ventana sin bordes, proporción fija, dos paneles y pantalla completa dentro de la ventana.
+
+El detalle de cada fase (requisitos, diseño y tareas) vive en `openspec/changes/`, y el comportamiento que debe cumplir cada plataforma, en `openspec/specs/`. Esta hoja de ruta es la visión general; las instrucciones para un agente que construya una versión están en `AGENTS.md`.
 
 ## Principios
 

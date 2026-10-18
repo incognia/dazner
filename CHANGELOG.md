@@ -5,6 +5,11 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Primera versión de DAZNer, visor nativo de DAZN con WebKit
 
+- docs: agrega `AGENTS.md` con la guía para agentes que construyen las demás plataformas (estructura, orden de los cambios, reglas sobre DRM y credenciales, lo descubierto de DAZN, el flujo en Windows con git desde WSL y compilación nativa, la codificación y la ubicación de `rules`) y `CLAUDE.md`, que lo importa; enlaza OpenSpec desde `README.md` y `ROADMAP.md`
+- chore: agrega `.editorconfig`, que fija UTF-8 y LF en todo el repositorio, UTF-8 con BOM en `.cs`, `.xaml` y `.ps1`, y CRLF en `.sln`, `.bat` y `.cmd`, para evitar que Windows-1252 corrompa los acentos
+- docs: agrega los cuatro cambios de OpenSpec con propuesta, especificaciones, diseño y tareas (`extract-fullscreen-script`, `add-windows-port`, `add-linux-qt-port` y `add-linux-gtk-port`), con la prueba de reproducción como primera tarea y como puerta de cada versión nueva
+- docs: agrega las siete especificaciones base de OpenSpec (`window-chrome`, `panes`, `fullscreen-emulation`, `session`, `playback`, `diagnostics` y `shortcuts`), que describen el comportamiento de la versión de macOS y son el contrato de paridad de las demás plataformas
+- chore: inicializa OpenSpec para Claude Code (`.claude/` con seis *skills* y seis comandos, `openspec/config.yaml` con el contexto del proyecto y las carpetas de especificaciones y cambios)
 - docs: actualiza `README.md` con la compilación mediante `macos/build.sh`, las rutas nuevas (`macos/` y `shared/`) en los comandos de ícono, instancias y diagnóstico, y una sección «Estructura del repositorio»; ajusta las rutas del ícono en `NOTICE.md` y marca la fase 0 como hecha en `ROADMAP.md`
 - feat: agrega `macos/build.sh`, que compila con `swiftc`, firma la aplicación de forma local y, con `--open`, la abre; crea la carpeta del ejecutable porque `.gitignore` la excluye y no existe en un clon nuevo
 - refactor: reorganiza el repositorio por plataforma (fase 0 de `ROADMAP.md`): `DAZNer.swift` y `DAZNer.app` pasan a `macos/`, y `assets/` y `scripts/make-icon.swift` pasan a `shared/`; `.gitignore` y el uso de `make-icon.swift` apuntan a las rutas nuevas
