@@ -5,7 +5,7 @@ description: "Visor nativo y mínimo de DAZN (NFL Game Pass) para macOS con WebK
 
 # DAZNer
 
-*Última modificación: 18 de octubre de 2026, 15:53 (CST)*
+*Última modificación: 18 de octubre de 2026, 16:03 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
@@ -14,12 +14,23 @@ description: "Visor nativo y mínimo de DAZN (NFL Game Pass) para macOS con WebK
 
 Visor nativo y mínimo de DAZN (NFL Game Pass) para macOS, hecho con WebKit. Muestra los partidos en una ventana sin bordes, ideal para pantallas grandes y para usarla junto al *multiview* de DAZN. Proyecto personal de Rodrigo Álvarez (@incognia).
 
+## Estado
+
+| Plataforma | Estado | Motor web |
+|---|---|---|
+| macOS | Disponible | WebKit (`WKWebView`) |
+| Windows | Planeada | WebView2 (Chromium) |
+| Linux (Qt) | Planeada | Qt WebEngine (Chromium) |
+| Linux (GTK) | Experimental: depende del DRM | WebKitGTK |
+
+En cada plataforma nueva se comprueba primero que DAZN reproduce en su motor web, y solo después se construye el resto. El orden de trabajo está en [ROADMAP.md](ROADMAP.md) y los pendientes, por máquina, en [TODO.md](TODO.md).
+
 ## Por qué WebKit
 
 - DAZN usa DRM. WebKit reproduce con FairPlay igual que Safari, sin configuración adicional.
 - Es un solo archivo de Swift que se compila con `swiftc`, sin Xcode y sin dependencias.
 
-## Compilar
+## Compilar (macOS)
 
 ```bash
 ./macos/build.sh --open
@@ -41,15 +52,17 @@ DAZNer/
 ├── macos/     código de la versión de macOS y su paquete DAZNer.app
 ├── shared/    ícono, imágenes y scripts comunes a todas las plataformas
 ├── openspec/  especificaciones del comportamiento y cambios en curso
-├── ROADMAP.md versiones para Windows y Linux, y plan de trabajo
-└── ...        README, CHANGELOG, NOTICE, AGENTS y LICENSE
+├── ROADMAP.md orden de ejecución y plan para Windows y Linux
+├── TODO.md    pendientes por orden y por máquina
+├── AGENTS.md  guía para agentes que trabajan en el repositorio
+└── ...        README, CHANGELOG, NOTICE y LICENSE
 ```
 
-Hoy solo existe la versión de macOS. La hoja de ruta con las versiones para Windows y Linux está en [ROADMAP.md](ROADMAP.md).
+Las versiones para Windows y Linux todavía no existen: su plan está en [ROADMAP.md](ROADMAP.md) y sus pendientes en [TODO.md](TODO.md).
 
 ## Desarrollo con OpenSpec
 
-El trabajo pendiente se planea con [OpenSpec](https://openspec.dev/): las especificaciones de `openspec/specs/` describen el comportamiento de la versión de macOS y son el contrato que debe cumplir cada plataforma nueva, y cada versión es un cambio en `openspec/changes/` (`extract-fullscreen-script`, `add-windows-port`, `add-linux-qt-port` y `add-linux-gtk-port`). Quien clone el repositorio para trabajar en uno de ellos debe leer primero [AGENTS.md](AGENTS.md).
+El trabajo pendiente se planea con [OpenSpec](https://openspec.dev/): las especificaciones de `openspec/specs/` describen el comportamiento de la versión de macOS y son el contrato que debe cumplir cada plataforma nueva, y cada versión es un cambio en `openspec/changes/` (`extract-fullscreen-script`, `add-windows-port`, `add-linux-qt-port` y `add-linux-gtk-port`). Quien clone el repositorio para trabajar en uno de ellos debe leer primero [AGENTS.md](AGENTS.md); el orden y los pendientes están en [ROADMAP.md](ROADMAP.md) y [TODO.md](TODO.md).
 
 ## Uso
 
