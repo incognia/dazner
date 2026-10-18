@@ -5,7 +5,7 @@ description: "Visor nativo y mínimo de DAZN (NFL Game Pass) para macOS con WebK
 
 # DAZNer
 
-*Última modificación: 18 de octubre de 2026, 13:47 (CST)*
+*Última modificación: 18 de octubre de 2026, 15:40 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
@@ -22,17 +22,29 @@ Visor nativo y mínimo de DAZN (NFL Game Pass) para macOS, hecho con WebKit. Mue
 ## Compilar
 
 ```bash
-swiftc -O DAZNer.swift -o DAZNer.app/Contents/MacOS/DAZNer
-codesign --force --sign - DAZNer.app
-open -n DAZNer.app
+./macos/build.sh --open
 ```
 
-Para regenerar el ícono a partir de `assets/icon.png`:
+El *script* compila con `swiftc`, firma la aplicación de forma local y, con `--open`, la abre. El resultado queda en `macos/DAZNer.app`.
+
+Para regenerar el ícono a partir de `shared/assets/icon.png`:
 
 ```bash
-swiftc scripts/make-icon.swift -o /tmp/make-icon
-/tmp/make-icon assets/icon.png DAZNer.app/Contents/Resources/app.icns
+swiftc shared/scripts/make-icon.swift -o /tmp/make-icon
+/tmp/make-icon shared/assets/icon.png macos/DAZNer.app/Contents/Resources/app.icns
 ```
+
+## Estructura del repositorio
+
+```text
+DAZNer/
+├── macos/     código de la versión de macOS y su paquete DAZNer.app
+├── shared/    ícono, imágenes y scripts comunes a todas las plataformas
+├── ROADMAP.md versiones para Windows y Linux, y plan de trabajo
+└── ...        README, CHANGELOG, NOTICE y LICENSE
+```
+
+Hoy solo existe la versión de macOS. La hoja de ruta con las versiones para Windows y Linux está en [ROADMAP.md](ROADMAP.md).
 
 ## Uso
 
@@ -42,15 +54,15 @@ swiftc scripts/make-icon.swift -o /tmp/make-icon
 - **Paneles:** ⌘1 un panel, ⌘2 dos paneles, con un hueco de 8 px entre ellos como en el *multiview* de DAZN. El segundo se crea al elegirlo y se cierra al volver a un panel, para liberar memoria.
 - **Pantalla completa:** el botón de pantalla completa de DAZN llena la ventana o el panel en lugar de pasar a la pantalla completa de macOS. Esc regresa al modo normal.
 - **Atajos:** ⌘L abre una URL en el panel con foco, ⌘R recarga, ⌘H vuelve al inicio de DAZN, ⌘` cambia el panel con audio, ⌘T deja la ventana siempre encima, ⌘W cierra y ⌘Q sale.
-- **Varias instancias:** `open -n DAZNer.app` abre otra ventana independiente. Comparten la misma sesión.
+- **Varias instancias:** `open -n macos/DAZNer.app` abre otra ventana independiente. Comparten la misma sesión.
 
 ## Modo de diagnóstico
 
 ```bash
-open -n DAZNer.app --args --debug
+open -n macos/DAZNer.app --args --debug
 ```
 
-Escribe `debug.log` junto a la aplicación con los eventos de pantalla completa y de cada panel, y habilita el inspector web de Safari. Está desactivado de forma predeterminada.
+Escribe `debug.log` junto a la aplicación (en `macos/`) con los eventos de pantalla completa y de cada panel, y habilita el inspector web de Safari. Está desactivado de forma predeterminada.
 
 ## Notas
 

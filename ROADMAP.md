@@ -1,6 +1,6 @@
 # Hoja de ruta
 
-*Última modificación: 18 de octubre de 2026, 15:35 (CST)*
+*Última modificación: 18 de octubre de 2026, 15:40 (CST)*
 
 DAZNer hoy existe solo para macOS. Esta hoja de ruta describe cómo reorganizar el repositorio y llevar el mismo visor a Windows y a Linux (GTK y Qt), sin perder lo que lo hace útil: ventana sin bordes, proporción fija, dos paneles y pantalla completa dentro de la ventana.
 
@@ -35,7 +35,7 @@ Qué implica para las fases:
 - **Gecko (Firefox) queda descartado como motor.** Además de los problemas con el DRM, incrustarlo en una aplicación propia es poco práctico.
 - **WebKitGTK sigue siendo la duda.** Que Chrome funcione en Linux no dice nada sobre WebKitGTK, que no puede cargar el módulo Widevine de Chrome. Por eso la variante GTK pasa a ser experimental y la de Qt, la prioritaria.
 
-## Fase 0: Reorganizar el repositorio
+## Fase 0: Reorganizar el repositorio (hecha)
 
 Mover todo lo específico de macOS a su propia carpeta para dejar sitio a las demás plataformas.
 
@@ -43,11 +43,11 @@ Estructura propuesta:
 
 ```text
 DAZNer/
-├── macos/              DAZNer.swift, Info.plist, build.sh
+├── macos/              DAZNer.swift, DAZNer.app/ (Info.plist e ícono), build.sh
 ├── windows/            (fase 2)
 ├── linux-gtk/          (fase 3a)
 ├── linux-qt/           (fase 3b)
-├── shared/             fill-fullscreen.js, assets/, scripts/make-icon.swift
+├── shared/             assets/, scripts/make-icon.swift (y fill-fullscreen.js en la fase 1)
 ├── README.md           visión general y enlaces por plataforma
 ├── CHANGELOG.md        un solo historial para todo el proyecto
 ├── ROADMAP.md

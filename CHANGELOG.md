@@ -5,6 +5,9 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Primera versión de DAZNer, visor nativo de DAZN con WebKit
 
+- docs: actualiza `README.md` con la compilación mediante `macos/build.sh`, las rutas nuevas (`macos/` y `shared/`) en los comandos de ícono, instancias y diagnóstico, y una sección «Estructura del repositorio»; ajusta las rutas del ícono en `NOTICE.md` y marca la fase 0 como hecha en `ROADMAP.md`
+- feat: agrega `macos/build.sh`, que compila con `swiftc`, firma la aplicación de forma local y, con `--open`, la abre; crea la carpeta del ejecutable porque `.gitignore` la excluye y no existe en un clon nuevo
+- refactor: reorganiza el repositorio por plataforma (fase 0 de `ROADMAP.md`): `DAZNer.swift` y `DAZNer.app` pasan a `macos/`, y `assets/` y `scripts/make-icon.swift` pasan a `shared/`; `.gitignore` y el uso de `make-icon.swift` apuntan a las rutas nuevas
 - docs: actualiza `ROADMAP.md` con la decisión de usar el lenguaje nativo de cada plataforma (Swift en macOS, C# con WPF en Windows, C++/QML con CMake en Qt y Vala/C con Meson en GTK), los enlaces de Vala verificados, Rust como alternativa descartada por ahora y el riesgo de mantener cuatro bases de código
 - docs: agrega `ROADMAP.md` con la hoja de ruta para llevar DAZNer a Windows (WebView2) y a Linux (Qt WebEngine como prioridad y WebKitGTK como variante experimental), con la reorganización del repositorio por plataforma, la extracción del *script* de pantalla completa a `shared/`, los datos confirmados sobre el DRM, la tabla de funciones por plataforma y los riesgos
 - docs: agrega `assets/social-preview.png` (1280×640 px), la imagen de vista previa que GitHub muestra al compartir el repositorio en redes sociales

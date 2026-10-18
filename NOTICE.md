@@ -12,7 +12,7 @@ DAZNer solo abre el sitio web de DAZN dentro de una ventana de WebKit. No contie
 
 ## Ícono de la aplicación
 
-El ícono (`assets/icon.png` y `DAZNer.app/Contents/Resources/app.icns`) es una imagen original del autor, un balón de fútbol americano con un botón de reproducción, y se distribuye bajo la misma licencia que el código.
+El ícono (`shared/assets/icon.png` y `macos/DAZNer.app/Contents/Resources/app.icns`) es una imagen original del autor, un balón de fútbol americano con un botón de reproducción, y se distribuye bajo la misma licencia que el código.
 
 ## Licencia del código
 
