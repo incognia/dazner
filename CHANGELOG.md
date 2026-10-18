@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Primera versión de DAZNer, visor nativo de DAZN con WebKit
 
+- docs: agrega `ROADMAP.md` con la hoja de ruta para llevar DAZNer a Windows (WebView2) y a Linux (Qt WebEngine como prioridad y WebKitGTK como variante experimental), con la reorganización del repositorio por plataforma, la extracción del *script* de pantalla completa a `shared/`, los datos confirmados sobre el DRM, la tabla de funciones por plataforma y los riesgos
 - docs: agrega `assets/social-preview.png` (1280×640 px), la imagen de vista previa que GitHub muestra al compartir el repositorio en redes sociales
 - docs: ajusta el `README.md` al formato de GitHub (*frontmatter*, marca de tiempo), agrega los *badges* de licencia GPLv3, plataforma, Swift y WebKit, y una sección «Licencia» con enlaces a `LICENSE` y `NOTICE.md`
 - chore: agrega `.gitignore` para no versionar el binario compilado, la firma que genera `codesign`, `debug.log` ni los `.DS_Store`
