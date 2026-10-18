@@ -1,6 +1,6 @@
 # Hoja de ruta
 
-*Última modificación: 18 de octubre de 2026, 14:35 (CST)*
+*Última modificación: 18 de octubre de 2026, 15:35 (CST)*
 
 DAZNer hoy existe solo para macOS. Esta hoja de ruta describe cómo reorganizar el repositorio y llevar el mismo visor a Windows y a Linux (GTK y Qt), sin perder lo que lo hace útil: ventana sin bordes, proporción fija, dos paneles y pantalla completa dentro de la ventana.
 
@@ -8,9 +8,10 @@ DAZNer hoy existe solo para macOS. Esta hoja de ruta describe cómo reorganizar 
 
 1. **Primero se prueba el DRM, después se construye la interfaz.** DAZN usa DRM y cada motor web lo trata distinto. En cada plataforma se hace una prueba de concepto mínima (abrir DAZN, iniciar sesión y reproducir un partido) antes de invertir en el resto. Si no reproduce, la fase termina ahí y se documenta.
 2. **Motor web nativo de cada sistema**, mínimo y sin dependencias pesadas. Se recurre a un *framework* más grande solo si es la única vía con DRM.
-3. **Compartir lo compartible:** el *script* de pantalla completa, los íconos y la documentación viven en un solo lugar.
-4. **La paridad se mide con la tabla de funciones** (al final), no a ojo.
-5. **Sin eludir protecciones.** DAZNer abre el sitio oficial con una suscripción propia. No se evade DRM, límites de reproducción ni controles de acceso (ver `NOTICE.md`).
+3. **Lenguaje nativo de cada plataforma:** Swift en macOS, C# en Windows, C++/QML en Qt (el estilo de KDE) y Vala/C en GTK (el estilo de GNOME). El costo son cuatro bases de código; se compensa compartiendo lo que sí se puede (el *script* de pantalla completa, los íconos y la documentación) y vigilando la paridad con la tabla de funciones.
+4. **Compartir lo compartible:** el *script* de pantalla completa, los íconos y la documentación viven en un solo lugar.
+5. **La paridad se mide con la tabla de funciones** (al final), no a ojo.
+6. **Sin eludir protecciones.** DAZNer abre el sitio oficial con una suscripción propia. No se evade DRM, límites de reproducción ni controles de acceso (ver `NOTICE.md`).
 
 ## Estado actual
 
@@ -78,7 +79,7 @@ Criterio de salida: macOS se comporta igual que antes, con el *script* cargado d
 ## Fase 2: Windows
 
 - **Motor:** WebView2 (Chromium de Edge).
-- **Lenguaje y interfaz:** C# con WPF o WinForms, por ser lo más corto para una ventana con dos controles web. Decisión pendiente.
+- **Lenguaje y interfaz:** C# (.NET) con WPF. Microsoft documenta WebView2 para C# en WPF, WinForms y WinUI 3, y para C/C++ en Win32. Se elige WPF por ser el camino más directo para una ventana sin bordes con dos controles web.
 - **Prueba de DRM (obligatoria):** WebView2 comparte el motor con Chrome y Edge, y DAZN ya funciona en Chrome para Windows, así que se espera que reproduzca. La prueba confirma que lo hace dentro de WebView2 y a qué calidad máxima.
 
 Funciones y cómo se resuelven:
@@ -103,13 +104,17 @@ Dos versiones, con una prueba de DRM antes de cada una. **Prioridad: primero Qt 
 ### 3a. GTK (GTK4 + WebKitGTK)
 
 - **Riesgo principal:** WebKitGTK no trae un módulo de DRM comercial utilizable y no puede cargar el Widevine de Chrome. Aunque DAZN funcione en Chrome para Linux, se espera que no reproduzca aquí. La prueba de concepto decide si esta variante se construye o se descarta.
-- **Si resulta viable:** lenguaje a decidir entre C, Vala y Rust. Se prioriza el que dé menos dependencias.
+- **Si resulta viable:** Vala/C con GTK4 y WebKitGTK 6.0, el estilo de GNOME: la aplicación en Vala y C solo para lo que Vala no cubra, ya que Vala compila a C y se mezcla con él sin problema. Se compila con Meson.
+- **Enlaces disponibles (verificado el 18 de octubre de 2026):** el repositorio de Vala trae `webkitgtk-6.0.vapi`, `gtk4.vapi` y `libsoup-3.0.vapi`, así que no hay que generar nada.
+- **Por qué Vala:** su sintaxis es muy parecida a la de C#, así que la lógica de la versión de Windows se traslada casi directo.
+- **Alternativa descartada por ahora:** Rust. Existe el *crate* `webkit6` (versión 0.6.1, de marzo de 2026), compatible con `gtk4` 0.11, así que sigue siendo viable si se cambia de opinión.
 - **Si no lo es:** se documenta el resultado en este archivo y se conserva GTK como idea futura, por si cambia el soporte de DRM.
 
 ### 3b. Qt (Qt 6 + Qt WebEngine)
 
 - **Motor:** Qt WebEngine (Chromium). Admite DRM si se le indica el módulo Widevine, que se toma de una instalación de Chrome o Firefox del usuario (por ejemplo con `--widevine-path`). DAZNer no lo redistribuye.
-- **Lenguaje:** C++ o Python con PySide6. Decisión pendiente.
+- **Lenguaje:** C++/QML, el estilo de KDE: la interfaz en QML (Qt Quick y el tipo `WebEngineView`) sobre un núcleo en C++. El C++ se mantiene mínimo: un `main.cpp` que arranca el motor de QML y cubre lo que QML no alcance (por ejemplo, la geometría de pantalla para «Rellenar y centrar»). Se compila con CMake.
+- **Qué cubre QML sin código extra:** `userScripts` para el *script* de pantalla completa, `audioMuted` por panel, un perfil con almacenamiento persistente para la sesión, y `startSystemMove` y `startSystemResize` para mover y redimensionar una ventana sin bordes. Esto se confirma en la prueba de concepto.
 - **Expectativa:** es la variante de Linux con más probabilidades de funcionar, porque comparte el motor con Chrome, donde DAZN ya reproduce bien. En Linux Widevine suele limitarse a un nivel de seguridad bajo, así que la calidad máxima puede ser menor que en macOS. Hay que medirlo.
 
 ### Limitaciones esperadas de Linux (según el servidor gráfico)
@@ -156,7 +161,7 @@ Leyenda: **Sí** = hecho, **Pendiente** = planeado, **Probable** = el motor es e
 - **DRM en Linux:** Chrome ya reproduce DAZN, así que Qt WebEngine debería hacerlo. El riesgo se concentra en GTK con WebKitGTK, y en que la calidad máxima en Linux sea menor que en macOS. Si GTK no reproduce, queda documentado como resultado válido.
 - **Cambios en DAZN:** el *script* de pantalla completa depende de la estructura de la página (clases, contenedores y estilos de DAZN). Si DAZN la cambia, hay que ajustarlo en las cuatro plataformas a la vez; por eso vive en `shared/`.
 - **Términos de DAZN:** DAZNer solo abre el sitio oficial, pero el uso del servicio queda sujeto a sus términos y condiciones.
-- **Lenguaje de Windows y de Linux:** decidir al empezar cada fase, con el criterio de menos dependencias.
+- **Cuatro bases de código:** cada plataforma usa su lenguaje nativo, así que la lógica común (paneles, hueco, proporción, audio) se escribe cuatro veces. Se mitiga con el *script* compartido, la tabla de paridad y un comportamiento documentado que cada versión debe cumplir.
 - **Distribución:** sin firma comercial en macOS ni en Windows habrá avisos del sistema. Firmar es una decisión de costo, aún sin tomar.
 
 ## Fuera de alcance
