@@ -1,6 +1,6 @@
-# Binario compilado (se genera con swiftc, ver README)
-DAZNer.app/Contents/MacOS/DAZNer
-DAZNer.app/Contents/_CodeSignature/
+# Binario compilado de macOS (se genera con macos/build.sh, ver README)
+macos/DAZNer.app/Contents/MacOS/DAZNer
+macos/DAZNer.app/Contents/_CodeSignature/
 
 # Registro del modo --debug
 debug.log

@@ -1,5 +1,5 @@
 // Genera app.icns a partir de un PNG cuadrado: lo recorta al cuerpo redondeado de ícono de macOS (824/1024) con margen transparente.
-// Uso: swiftc scripts/make-icon.swift -o /tmp/make-icon && /tmp/make-icon assets/icon.png DAZNer.app/Contents/Resources/app.icns
+// Uso (desde la raíz del repositorio): swiftc shared/scripts/make-icon.swift -o /tmp/make-icon && /tmp/make-icon shared/assets/icon.png macos/DAZNer.app/Contents/Resources/app.icns
 import Cocoa
 
 let args = CommandLine.arguments
