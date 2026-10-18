@@ -1,6 +1,6 @@
 # Guía para agentes
 
-*Última modificación: 18 de octubre de 2026, 16:03 (CST)*
+*Última modificación: 18 de octubre de 2026, 16:47 (CST)*
 
 Este archivo es para un agente de IA que trabaja en este repositorio, sobre todo si lo clonó en Windows o Linux para construir una de las versiones pendientes. El autor mantiene un repositorio de reglas personales (`rules`) con las *skills* de trabajo (`/commit`, `/changelogger`, `/git-init`, `/licensing`) y sus procedimientos. Está presente en sus máquinas con Linux, en WSL y en Windows, así que **si existe, manda sobre el resumen de este archivo**; este archivo recoge lo esencial por si no está.
 
@@ -16,6 +16,7 @@ shared/    ícono, imágenes y scripts comunes (aquí irá fill-fullscreen.js)
 openspec/  especificaciones y cambios (el plan de trabajo, ver abajo)
 ROADMAP.md visión general y orden de ejecución
 TODO.md    pendientes por orden y por máquina
+.github/   plantilla de PR, configuración de pr-check y el flujo de GitHub Actions que corre el script de rules
 windows/   (por crear) linux-qt/ (por crear)  linux-gtk/ (por crear)
 ```
 
@@ -116,3 +117,4 @@ Resumen de lo esencial; si `rules` está disponible, sus procedimientos prevalec
 - **CHANGELOG.md:** un bloque por fecha, `## [AAAA-MM-DD] - Título descriptivo`, con la fecha en hora del centro de México (UTC-6). Viñetas `tipo: descripción en español`, sin subencabezados, con la más reciente arriba, sin líneas en blanco entre viñetas y solo añadiendo (no se editan viñetas existentes). El `CHANGELOG.md` va en el último *commit* de cada serie.
 - **Identidad de Git:** la del autor ya está configurada en su máquina. No cambies `user.name`, `user.email` ni el remoto. Si falta, pide la identidad al usuario.
 - **Publicar:** no hagas `git push` sin que el usuario lo haya pedido.
+- **Pull requests:** un PR que no pase `check-pr.sh` se rechaza sin revisar el código. El *script* vive en el repositorio de reglas (`~/rules/scripts/check-pr.sh`, con la *skill* `/pr-check` y las reglas en `~/rules/rulesets/PR_CHECK.md`); este repositorio solo aporta su configuración en `.github/pr-check.conf`. Córrelo antes de abrirlo: `~/rules/scripts/check-pr.sh --base origin/main` (con `bash`; en Windows, desde WSL o Git Bash). Comprueba el formato de los *commits*, las reglas del CHANGELOG, que no haya archivos ajenos y que OpenSpec valide. Usa la plantilla de `.github/PULL_REQUEST_TEMPLATE.md` y no quites ninguna de sus secciones. Las reglas se aplican con tu propio entorno e identidad: lo que se revisa es el resultado, no la herramienta.

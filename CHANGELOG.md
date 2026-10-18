@@ -5,6 +5,10 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Primera versión de DAZNer, visor nativo de DAZN con WebKit
 
+- docs: agrega a `README.md` la sección «Contribuir» y a `AGENTS.md` la regla de *pull requests*, que remiten al *script* `check-pr.sh` del repositorio de reglas, a la *skill* `/pr-check` y a `.github/pr-check.conf`; un PR que no pase la verificación se rechaza sin revisar el código
+- ci: agrega `.github/workflows/pr-check.yaml`, que en cada *pull request* descarga el repositorio `rules` y corre su `scripts/check-pr.sh` con las ramas, el título y la descripción del PR; esos datos se pasan por el entorno y nunca se interpolan en el *script*
+- chore: agrega `.github/pr-check.conf` con los patrones de archivos ajenos propios del proyecto (el binario y la firma del paquete `.app`)
+- docs: agrega `.github/PULL_REQUEST_TEMPLATE.md` con las ocho secciones obligatorias del PR (contexto, qué cambia, cómo se verificó, qué no se probó, decisiones, riesgos, herramienta de IA y lista de verificación)
 - docs: agrega a `README.md` la sección «Estado» con una tabla por plataforma (macOS disponible; Windows, Linux Qt y Linux GTK planeadas o experimentales) y su motor web, renombra «Compilar» como «Compilar (macOS)», enlaza `ROADMAP.md` y `TODO.md` y lista `TODO.md` y `AGENTS.md` en la estructura del repositorio; en `AGENTS.md` agrega `ROADMAP.md` y `TODO.md` a la estructura y corrige el orden de trabajo, ya que la prueba de reproducción de cada versión puede hacerse desde ya
 - docs: agrega `TODO.md` con los pendientes por orden de ejecución y por máquina (macOS, Windows y Linux), los pasos posteriores según los resultados de las pruebas, el cierre de la fase 4 y las preguntas abiertas
 - docs: agrega a `ROADMAP.md` la sección «Orden de ejecución» con la tabla de pasos y sus dependencias (las pruebas de reproducción de cada plataforma no dependen del *script* compartido y se hacen en paralelo con su extracción), y ajusta las propuestas de `add-windows-port`, `add-linux-qt-port` y `add-linux-gtk-port` para reflejarlo
