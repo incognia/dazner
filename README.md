@@ -1,4 +1,16 @@
+---
+title: "DAZNer"
+description: "Visor nativo y mínimo de DAZN (NFL Game Pass) para macOS con WebKit: ventana sin bordes, dos paneles y pantalla completa dentro de la ventana."
+---
+
 # DAZNer
+
+*Última modificación: 18 de octubre de 2026, 13:47 (CST)*
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
+[![Swift](https://img.shields.io/badge/Swift-F05138?logo=swift&logoColor=white)](https://www.swift.org/)
+[![WebKit](https://img.shields.io/badge/WebKit-WKWebView-informational.svg)](https://webkit.org/)
 
 Visor nativo y mínimo de DAZN (NFL Game Pass) para macOS, hecho con WebKit. Muestra los partidos en una ventana sin bordes, ideal para pantallas grandes y para usarla junto al *multiview* de DAZN. Proyecto personal de Rodrigo Álvarez (@incognia).
 
@@ -48,6 +60,10 @@ Escribe `debug.log` junto a la aplicación con los eventos de pantalla completa 
 - El límite de reproducción de DAZN depende de la ubicación (red) y no del número de ventanas.
 - La aplicación está firmada solo de forma local. Si macOS la bloquea, ábrela con clic derecho → Abrir.
 - Las opciones de 3 y 4 paneles están comentadas en el código para reutilizarlas después.
+
+## Licencia
+
+DAZNer es software libre y se distribuye bajo la licencia GPLv3. Consulta el texto completo en [LICENSE](LICENSE) y el aviso de proyecto no oficial y de marcas en [NOTICE.md](NOTICE.md).
 
 <!-- licence:start -->
 
