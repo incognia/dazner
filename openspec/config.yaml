@@ -1,0 +1,45 @@
+schema: spec-driven
+
+# Contexto del proyecto: solo lo que un agente no puede deducir leyendo el código.
+context: |
+  DAZNer es un visor mínimo de DAZN (NFL Game Pass): abre el sitio oficial en una ventana
+  sin bordes, con uno o dos paneles. Hoy existe la versión de macOS (carpeta macos/).
+  Las especificaciones de openspec/specs/ describen el comportamiento de esa versión y son
+  el contrato de paridad que deben cumplir Windows, Linux Qt y Linux GTK.
+
+  Idioma: los artefactos se escriben en español de México, salvo las palabras clave del
+  formato (SHALL, MUST, WHEN, THEN), que se dejan en inglés. Los mensajes de commit van en
+  inglés internacional (UK). Nunca se escribe en un commit que se edita el CHANGELOG.
+
+  Decisiones que no están en el código:
+  - Lenguaje nativo por plataforma: Swift en macOS, C# (.NET, WPF) en Windows,
+    C++/QML en Qt (CMake) y Vala/C en GTK (Meson).
+  - Cada versión usa el motor web nativo de su sistema y debe reproducir con el DRM de ese
+    motor. La reproducción de DAZN se comprueba antes de construir nada más; si falla, el
+    trabajo se detiene y el resultado se documenta.
+  - Está prohibido eludir DRM, controles de acceso o límites de reproducción, y redistribuir
+    módulos de DRM. DAZNer solo abre el sitio oficial con una suscripción propia.
+  - El script de pantalla completa debe ser JavaScript compartido entre plataformas
+    (shared/fill-fullscreen.js); cada plataforma solo aporta el puente de registro y la carga.
+  - macOS es la única plataforma que puede compilarse y probarse en la máquina del autor.
+    Windows y Linux se compilan y prueban en esas máquinas o en CI; el agente no debe
+    afirmar que algo funciona en una plataforma que no pudo ejecutar.
+
+rules:
+  proposal:
+    - Indicar siempre qué queda fuera del alcance.
+    - Si el cambio es una versión para otra plataforma, enlazar las capacidades neutrales que debe cumplir.
+  design:
+    - Incluir la decisión de lenguaje, motor y herramienta de compilación, y por qué.
+    - Registrar las preguntas abiertas que cambien lo que se construye.
+  tasks:
+    - El primer grupo de una versión nueva es la prueba de DRM, y debe decir cuándo detenerse.
+    - Cada tarea indica cómo se verifica; lo que solo puede verificarse en otro sistema operativo se marca así.
+
+operations:
+  apply:
+    guidance:
+      - No marcar una tarea como hecha si no se pudo ejecutar en este sistema operativo; dejarla pendiente y decir dónde probarla.
+  archive:
+    guidance:
+      - Resumir el resultado antes de archivar y recordar registrar el cambio con /changelogger y /commit.
