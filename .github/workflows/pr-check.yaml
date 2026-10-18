@@ -1,0 +1,56 @@
+name: PR checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  # The checks live in the rules repository (rulesets/PR_CHECK.md). Pin this to a tag or a
+  # commit SHA once one exists, so that a change in rules cannot break or weaken the checks
+  # of this repository without notice.
+  RULES_REF: main
+
+jobs:
+  conventions:
+    name: Conventions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the pull request
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check out the rules repository
+        uses: actions/checkout@v4
+        with:
+          repository: incognia/rules
+          ref: ${{ env.RULES_REF }}
+          path: .rules
+
+      # OpenSpec needs Node.js 20.19 or newer
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check the pull request
+        # The title and the body are untrusted text: they are passed through the
+        # environment and never interpolated into the script.
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          printf '%s' "$PR_BODY" > "$RUNNER_TEMP/pr-body.md"
+          bash .rules/scripts/check-pr.sh \
+            --base "$BASE_SHA" \
+            --head "$HEAD_SHA" \
+            --title "$PR_TITLE" \
+            --body-file "$RUNNER_TEMP/pr-body.md"
