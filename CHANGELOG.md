@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Primera versión de DAZNer, visor nativo de DAZN con WebKit
 
+- docs: agrega `assets/social-preview.png` (1280×640 px), la imagen de vista previa que GitHub muestra al compartir el repositorio en redes sociales
 - docs: ajusta el `README.md` al formato de GitHub (*frontmatter*, marca de tiempo), agrega los *badges* de licencia GPLv3, plataforma, Swift y WebKit, y una sección «Licencia» con enlaces a `LICENSE` y `NOTICE.md`
 - chore: agrega `.gitignore` para no versionar el binario compilado, la firma que genera `codesign`, `debug.log` ni los `.DS_Store`
 - feat: reemplaza el ícono de la aplicación, que era el logotipo de DAZN, por uno original (un balón de fútbol americano con un botón de reproducción); la imagen fuente queda en `assets/icon.png` y `scripts/make-icon.swift` genera `app.icns` con el cuerpo redondeado y el margen transparente de los íconos de macOS
