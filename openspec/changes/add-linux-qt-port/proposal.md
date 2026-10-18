@@ -26,5 +26,5 @@ Fuera del alcance: empaquetado (AppImage, Flatpak), la variante GTK y cualquier 
 
 - Nueva carpeta `linux-qt/` con el proyecto de QML y C++.
 - `README.md` y `ROADMAP.md`: estado de Linux Qt, requisitos y compilación.
-- Depende de `extract-fullscreen-script`.
+- La prueba de reproducción (grupo 1 de las tareas) no depende de nada y puede hacerse desde ya. El resto depende de `extract-fullscreen-script`.
 - Requiere una máquina con Linux para compilar y probar; no se puede verificar desde macOS.

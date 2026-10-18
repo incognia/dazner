@@ -1,6 +1,6 @@
 # Hoja de ruta
 
-*Última modificación: 18 de octubre de 2026, 15:53 (CST)*
+*Última modificación: 18 de octubre de 2026, 16:03 (CST)*
 
 DAZNer hoy existe solo para macOS. Esta hoja de ruta describe cómo reorganizar el repositorio y llevar el mismo visor a Windows y a Linux (GTK y Qt), sin perder lo que lo hace útil: ventana sin bordes, proporción fija, dos paneles y pantalla completa dentro de la ventana.
 
@@ -23,6 +23,31 @@ El detalle de cada fase (requisitos, diseño y tareas) vive en `openspec/changes
 | Windows | Sin empezar |
 | Linux GTK | Sin empezar |
 | Linux Qt | Sin empezar |
+
+## Orden de ejecución
+
+La prueba de reproducción de cada plataforma (el primer grupo de tareas de su cambio de OpenSpec) no depende del *script* compartido: solo abre DAZN en el motor web de esa plataforma. Por eso se hace desde ya y en paralelo con la extracción del *script*, y sus resultados deciden si se sigue con cada versión. El resto de cada versión sí espera a que exista `shared/fill-fullscreen.js`.
+
+| Paso | Qué | Dónde | Depende de |
+|---|---|---|---|
+| 0 | Reorganizar el repositorio (fase 0) | macOS | Hecho |
+| 1a | Extraer el *script* de pantalla completa (`extract-fullscreen-script`, fase 1) | macOS | Nada |
+| 1b | Prueba de reproducción en Windows (`add-windows-port`, grupo 1) | Windows | Nada |
+| 1c | Prueba de reproducción con Qt (`add-linux-qt-port`, grupo 1) | Linux | Nada |
+| 1d | Prueba de reproducción con GTK (`add-linux-gtk-port`, grupo 1) | Linux | Nada |
+| 2 | Decidir con los resultados y anotarlos | Cualquiera | 1b, 1c y 1d |
+| 3 | Terminar la versión de Windows (grupos 2 a 5 de `add-windows-port`) | Windows | 1a, y que 1b pase |
+| 4 | Terminar la versión con Qt (grupos 2 a 5 de `add-linux-qt-port`) | Linux | 1a, y que 1c pase |
+| 5 | Terminar la versión con GTK (grupos 2 a 5 de `add-linux-gtk-port`) | Linux | 1a, y que 1d pase |
+| 6 | Paridad, empaquetado, CI y publicación (fase 4) | Todas | 3, 4 y 5 |
+
+Reglas del orden:
+
+- Los pasos 1a, 1b, 1c y 1d son independientes entre sí y pueden hacerse a la vez en máquinas distintas.
+- Si una prueba falla, se documenta el resultado y el paso siguiente de esa plataforma no se ejecuta.
+- Los pasos 3, 4 y 5 son independientes entre sí. Si hay que elegir, el orden de prioridad es Windows, luego Qt y por último GTK, que es experimental.
+- La fase 4 todavía no tiene un cambio de OpenSpec; se propone con `/opsx:propose` al llegar al paso 6.
+- Los pendientes de cada paso, por máquina, están en `TODO.md`.
 
 ## Lo que ya sabemos del DRM
 

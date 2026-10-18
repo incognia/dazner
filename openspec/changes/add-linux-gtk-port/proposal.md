@@ -25,5 +25,5 @@ Fuera del alcance: empaquetado, la variante Qt y cualquier cambio en las demás 
 
 - Si la prueba pasa: nueva carpeta `linux-gtk/` con el proyecto de Vala.
 - En cualquier caso: `ROADMAP.md` registra el resultado de la prueba, y `README.md` el estado de esta variante.
-- Depende de `extract-fullscreen-script`.
+- La prueba de reproducción (grupo 1 de las tareas) no depende de nada y puede hacerse desde ya. El resto depende de `extract-fullscreen-script`.
 - Requiere una máquina con Linux para compilar y probar; no se puede verificar desde macOS.
