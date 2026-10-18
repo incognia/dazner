@@ -12,10 +12,10 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # The checks live in the rules repository (rulesets/PR_CHECK.md). Pin this to a tag or a
-  # commit SHA once one exists, so that a change in rules cannot break or weaken the checks
-  # of this repository without notice.
-  RULES_REF: main
+  # The checks live in the rules repository (rulesets/PR_CHECK.md). They are pinned to a
+  # release so that a change in rules cannot break or weaken the checks of this repository
+  # without notice. To adopt a newer version, review what changed and bump the tag here.
+  RULES_REF: v0.1.0
 
 jobs:
   conventions:

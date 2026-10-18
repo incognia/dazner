@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Primera versión de DAZNer, visor nativo de DAZN con WebKit
 
+- ci: fija el flujo `.github/workflows/pr-check.yaml` a la versión `v0.1.0` del repositorio `rules` en lugar de `main`, para que un cambio en `rules` no altere ni debilite la verificación de los PR sin aviso; para adoptar una versión nueva se revisa qué cambió y se sube la etiqueta
 - docs: agrega a `README.md` la sección «Contribuir» y a `AGENTS.md` la regla de *pull requests*, que remiten al *script* `check-pr.sh` del repositorio de reglas, a la *skill* `/pr-check` y a `.github/pr-check.conf`; un PR que no pase la verificación se rechaza sin revisar el código
 - ci: agrega `.github/workflows/pr-check.yaml`, que en cada *pull request* descarga el repositorio `rules` y corre su `scripts/check-pr.sh` con las ramas, el título y la descripción del PR; esos datos se pasan por el entorno y nunca se interpolan en el *script*
 - chore: agrega `.github/pr-check.conf` con los patrones de archivos ajenos propios del proyecto (el binario y la firma del paquete `.app`)
