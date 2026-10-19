@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Primera versión de DAZNer, visor nativo de DAZN con WebKit
 
+- docs: actualiza `AGENTS.md` y `TODO.md` para reflejar que el *script* de pantalla completa ya es compartido (`shared/fill-fullscreen.js`): quita de la tabla de cambios activos `extract-fullscreen-script`, que ya está archivado, corrige el orden de trabajo y la estructura, y mueve la extracción de los pendientes a lo hecho
 - docs: marca la fase 1 de `ROADMAP.md` como hecha, con lo verificado en macOS, y actualiza `README.md` para explicar que `macos/build.sh` copia al paquete el *script* de pantalla completa de `shared/`
 - docs: archiva el cambio `extract-fullscreen-script` de OpenSpec y fusiona sus tres requisitos nuevos (*script* compartido, gancho de registro neutro y diagnóstico controlado desde fuera) en la especificación principal `fullscreen-emulation`
 - refactor: extrae el *script* de pantalla completa de `macos/DAZNer.swift` a `shared/fill-fullscreen.js`, común a todas las plataformas: el diagnóstico se controla con `window.__daznerDebug`, el registro pasa por el gancho neutro `window.__daznerLog` y macOS carga el *script* desde el paquete con un puente propio; `macos/build.sh` lo copia antes de firmar y avisa si falta, y `.gitignore` ignora esa copia
