@@ -1,16 +1,12 @@
 # Pendientes
 
-*Última modificación: 18 de octubre de 2026, 16:03 (CST)*
+*Última modificación: 18 de octubre de 2026, 19:55 (CST)*
 
 Vista corta de lo que falta, por orden de ejecución y por máquina. El detalle de cada tarea (con su verificación) está en `openspec/changes/<cambio>/tasks.md`, y el orden completo y sus dependencias, en la sección «Orden de ejecución» de `ROADMAP.md`. Si este archivo y OpenSpec discrepan, manda OpenSpec.
 
 ## Ahora, en paralelo
 
-Estos cuatro pasos no dependen entre sí. Las pruebas de reproducción deciden si se sigue con cada versión.
-
-### En macOS
-
-- [ ] **Extraer el *script* de pantalla completa** (`extract-fullscreen-script`, 9 tareas): mover el *script* a `shared/fill-fullscreen.js`, cargarlo desde `macos/` y comprobar que macOS se comporta igual. Es prerrequisito del resto de cada versión.
+Estas tres pruebas no dependen entre sí y deciden si se sigue con cada versión.
 
 ### En Windows (compilar desde Windows nativo; git desde WSL)
 
@@ -24,8 +20,8 @@ Estos cuatro pasos no dependen entre sí. Las pruebas de reproducción deciden s
 ## Después, según los resultados
 
 - [ ] **Anotar los resultados** de las tres pruebas en el `design.md` de cada cambio y en `ROADMAP.md`, y decidir qué versiones siguen.
-- [ ] **Terminar Windows** (`add-windows-port`, grupos 2 a 5, 14 tareas): ventana, paneles, pantalla completa, sesión, atajos, paquete y paridad. Requiere el *script* compartido y que la prueba pase.
-- [ ] **Terminar Qt** (`add-linux-qt-port`, grupos 2 a 5, 14 tareas): lo mismo, con las limitaciones de Wayland. Requiere el *script* compartido y que la prueba pase.
+- [ ] **Terminar Windows** (`add-windows-port`, grupos 2 a 5, 14 tareas): ventana, paneles, pantalla completa, sesión, atajos, paquete y paridad. Requiere que la prueba pase.
+- [ ] **Terminar Qt** (`add-linux-qt-port`, grupos 2 a 5, 14 tareas): lo mismo, con las limitaciones de Wayland. Requiere que la prueba pase.
 - [ ] **Terminar GTK** (`add-linux-gtk-port`, grupos 2 a 5, 13 tareas), solo si la prueba de GTK pasa.
 
 Prioridad si hay que elegir: Windows, luego Qt, luego GTK.
@@ -53,3 +49,4 @@ Prioridad si hay que elegir: Windows, luego Qt, luego GTK.
 - [x] Hoja de ruta, con los lenguajes nativos por plataforma y los datos confirmados sobre el DRM.
 - [x] OpenSpec: siete especificaciones base de macOS y cuatro cambios propuestos.
 - [x] `AGENTS.md` y `.editorconfig`.
+- [x] Extracción del *script* de pantalla completa a `shared/fill-fullscreen.js` (fase 1): macOS lo carga desde el paquete y se verificó con el modo `--debug`.

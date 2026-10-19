@@ -1,6 +1,6 @@
 # Guía para agentes
 
-*Última modificación: 18 de octubre de 2026, 16:47 (CST)*
+*Última modificación: 18 de octubre de 2026, 19:55 (CST)*
 
 Este archivo es para un agente de IA que trabaja en este repositorio, sobre todo si lo clonó en Windows o Linux para construir una de las versiones pendientes. El autor mantiene un repositorio de reglas personales (`rules`) con las *skills* de trabajo (`/commit`, `/changelogger`, `/git-init`, `/licensing`) y sus procedimientos. Está presente en sus máquinas con Linux, en WSL y en Windows, así que **si existe, manda sobre el resumen de este archivo**; este archivo recoge lo esencial por si no está.
 
@@ -12,7 +12,7 @@ Visor mínimo de DAZN (NFL Game Pass): abre el sitio oficial en una ventana sin 
 
 ```text
 macos/     Swift sobre WKWebView; DAZNer.swift, build.sh y el paquete DAZNer.app
-shared/    ícono, imágenes y scripts comunes (aquí irá fill-fullscreen.js)
+shared/    ícono, imágenes y scripts comunes, entre ellos fill-fullscreen.js
 openspec/  especificaciones y cambios (el plan de trabajo, ver abajo)
 ROADMAP.md visión general y orden de ejecución
 TODO.md    pendientes por orden y por máquina
@@ -35,12 +35,11 @@ El plan está en `openspec/`. Las especificaciones de `openspec/specs/` describe
 
 | Cambio | Qué hace | Se puede probar en |
 |---|---|---|
-| `extract-fullscreen-script` | Saca el script de pantalla completa a `shared/fill-fullscreen.js` | macOS |
 | `add-windows-port` | Versión de Windows | Windows |
 | `add-linux-qt-port` | Versión de Linux con Qt | Linux |
 | `add-linux-gtk-port` | Versión de Linux con GTK (experimental) | Linux |
 
-**Orden:** la prueba de reproducción (grupo 1) de cada versión nueva no depende de nada y puede hacerse desde ya, en paralelo con `extract-fullscreen-script`, que se hace en macOS. El resto de cada versión (grupos 2 a 5) depende de que exista el script compartido. Después, las versiones son independientes entre sí. El detalle está en la sección «Orden de ejecución» de `ROADMAP.md` y los pendientes, por máquina, en `TODO.md`.
+**Orden:** el script de pantalla completa ya es compartido: vive en `shared/fill-fullscreen.js` y macOS lo carga desde el paquete (cambio `extract-fullscreen-script`, ya archivado). La prueba de reproducción (grupo 1) de cada versión nueva no depende de nada y se hace primero; el resto de cada versión (grupos 2 a 5) sigue en cuanto esa prueba pase. Las versiones son independientes entre sí. El detalle está en la sección «Orden de ejecución» de `ROADMAP.md` y los pendientes, por máquina, en `TODO.md`.
 
 Para trabajar un cambio:
 
