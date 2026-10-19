@@ -5,7 +5,7 @@ description: "Visor nativo y mínimo de DAZN (NFL Game Pass) para macOS con WebK
 
 # DAZNer
 
-*Última modificación: 18 de octubre de 2026, 16:47 (CST)*
+*Última modificación: 18 de octubre de 2026, 19:36 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
@@ -36,7 +36,7 @@ En cada plataforma nueva se comprueba primero que DAZN reproduce en su motor web
 ./macos/build.sh --open
 ```
 
-El *script* compila con `swiftc`, firma la aplicación de forma local y, con `--open`, la abre. El resultado queda en `macos/DAZNer.app`.
+El *script* compila con `swiftc`, copia al paquete el *script* de pantalla completa de `shared/fill-fullscreen.js`, firma la aplicación de forma local y, con `--open`, la abre. El resultado queda en `macos/DAZNer.app`.
 
 Para regenerar el ícono a partir de `shared/assets/icon.png`:
 
@@ -50,7 +50,7 @@ swiftc shared/scripts/make-icon.swift -o /tmp/make-icon
 ```text
 DAZNer/
 ├── macos/     código de la versión de macOS y su paquete DAZNer.app
-├── shared/    ícono, imágenes y scripts comunes a todas las plataformas
+├── shared/    ícono, imágenes y scripts comunes, entre ellos el de pantalla completa
 ├── openspec/  especificaciones del comportamiento y cambios en curso
 ├── ROADMAP.md orden de ejecución y plan para Windows y Linux
 ├── TODO.md    pendientes por orden y por máquina
