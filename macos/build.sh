@@ -10,6 +10,17 @@ cd "$(dirname "$0")"
 mkdir -p DAZNer.app/Contents/MacOS
 
 swiftc -O DAZNer.swift -o DAZNer.app/Contents/MacOS/DAZNer
+
+# El script de pantalla completa es común a todas las plataformas y vive en shared/.
+# Se copia al paquete antes de firmar, porque la firma sella los recursos.
+SHARED_SCRIPT="../shared/fill-fullscreen.js"
+if [[ ! -f "$SHARED_SCRIPT" ]]; then
+    echo "Falta $SHARED_SCRIPT: sin él la pantalla completa no se emula." >&2
+    exit 1
+fi
+mkdir -p DAZNer.app/Contents/Resources
+cp "$SHARED_SCRIPT" DAZNer.app/Contents/Resources/fill-fullscreen.js
+
 codesign --force --sign - DAZNer.app
 
 echo "Listo: $(pwd)/DAZNer.app"
