@@ -5,7 +5,7 @@ description: "Visor nativo y mínimo de DAZN (NFL Game Pass) para macOS con WebK
 
 # DAZNer
 
-*Última modificación: 18 de octubre de 2026, 19:36 (CST)*
+*Última modificación: 18 de octubre de 2026, 19:45 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
@@ -66,7 +66,7 @@ El trabajo pendiente se planea con [OpenSpec](https://openspec.dev/): las especi
 
 ## Contribuir
 
-Todo cambio entra por un *pull request* con la plantilla de [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md), a partir de un cambio de OpenSpec. Antes de abrirlo, corre `~/rules/scripts/check-pr.sh --base origin/main` (o `/pr-check`), el mismo que corre GitHub Actions; el *script* y sus reglas están en el repositorio [incognia/rules](https://github.com/incognia/rules) y la configuración de este proyecto, en `.github/pr-check.conf`. Un PR que no lo pase se rechaza sin revisar el código: *commits* atómicos en inglés (UK) con Conventional Commits y `Co-Authored-By`, viñetas del CHANGELOG solo añadidas y en el último *commit*, y ningún archivo ajeno. Los detalles para agentes están en [AGENTS.md](AGENTS.md).
+Todo cambio entra por un *pull request* con la plantilla de [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md), a partir de un cambio de OpenSpec. Antes de abrirlo, corre `~/rules/scripts/check-pr.sh --base origin/main` (o `/pr-check`), el mismo que corre GitHub Actions; el *script* y sus reglas están en el repositorio [incognia/rules](https://github.com/incognia/rules) y la configuración de este proyecto, en `.github/pr-check.conf`. Un PR que no lo pase se rechaza sin revisar el código: *commits* atómicos en inglés (UK) con Conventional Commits y `Co-Authored-By`, viñetas del CHANGELOG solo añadidas y en el último *commit*, y ningún archivo ajeno. Los detalles para agentes están en [AGENTS.md](AGENTS.md). Si quieres demostrar cómo trabajas con IA en un proyecto real, el reto abierto está en [CHALLENGE.md](CHALLENGE.md).
 
 ## Uso
 

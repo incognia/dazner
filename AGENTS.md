@@ -1,6 +1,6 @@
 # Guía para agentes
 
-*Última modificación: 18 de octubre de 2026, 19:55 (CST)*
+*Última modificación: 18 de octubre de 2026, 20:05 (CST)*
 
 Este archivo es para un agente de IA que trabaja en este repositorio, sobre todo si lo clonó en Windows o Linux para construir una de las versiones pendientes. El autor mantiene un repositorio de reglas personales (`rules`) con las *skills* de trabajo (`/commit`, `/changelogger`, `/git-init`, `/licensing`) y sus procedimientos. Está presente en sus máquinas con Linux, en WSL y en Windows, así que **si existe, manda sobre el resumen de este archivo**; este archivo recoge lo esencial por si no está.
 
@@ -68,7 +68,7 @@ Esto explica por qué el script de pantalla completa es como es. No lo reinvente
 - **Hueco entre videos:** 4 px de la cuadrícula más 2 px de borde por celda a cada lado, es decir, 8 px entre videos. Se midió de 1280×720 a 2478×1394. Con dos paneles se deja 8 px dentro del ancho de la ventana para conservar la proporción 32:9.
 - **Cambiar el tamaño de la ventana refresca el panel:** DAZN rehace el reproductor. Por eso, al abrir el segundo panel, la ventana cambia primero y el primer panel conserva su tamaño.
 - **La barra gris del borde derecho en pantalla completa** es el panel de estadísticas de DAZN. No es un error.
-- Una captura de pantalla de un video con DRM sale en negro; no sirve para diagnosticar.
+- Una captura de pantalla de un video con DRM sale en negro; no sirve para diagnosticar. La evidencia que se acepta son fotos de celular en horizontal (ver `CHALLENGE.md`); no se usan videos ni capturadoras de video, porque estas últimas eluden el DRM.
 
 ## Depuración
 
