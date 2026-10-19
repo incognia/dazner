@@ -5,6 +5,9 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Primera versión de DAZNer, visor nativo de DAZN con WebKit
 
+- docs: marca la fase 1 de `ROADMAP.md` como hecha, con lo verificado en macOS, y actualiza `README.md` para explicar que `macos/build.sh` copia al paquete el *script* de pantalla completa de `shared/`
+- docs: archiva el cambio `extract-fullscreen-script` de OpenSpec y fusiona sus tres requisitos nuevos (*script* compartido, gancho de registro neutro y diagnóstico controlado desde fuera) en la especificación principal `fullscreen-emulation`
+- refactor: extrae el *script* de pantalla completa de `macos/DAZNer.swift` a `shared/fill-fullscreen.js`, común a todas las plataformas: el diagnóstico se controla con `window.__daznerDebug`, el registro pasa por el gancho neutro `window.__daznerLog` y macOS carga el *script* desde el paquete con un puente propio; `macos/build.sh` lo copia antes de firmar y avisa si falta, y `.gitignore` ignora esa copia
 - ci: fija el flujo `.github/workflows/pr-check.yaml` a la versión `v0.1.0` del repositorio `rules` en lugar de `main`, para que un cambio en `rules` no altere ni debilite la verificación de los PR sin aviso; para adoptar una versión nueva se revisa qué cambió y se sube la etiqueta
 - docs: agrega a `README.md` la sección «Contribuir» y a `AGENTS.md` la regla de *pull requests*, que remiten al *script* `check-pr.sh` del repositorio de reglas, a la *skill* `/pr-check` y a `.github/pr-check.conf`; un PR que no pase la verificación se rechaza sin revisar el código
 - ci: agrega `.github/workflows/pr-check.yaml`, que en cada *pull request* descarga el repositorio `rules` y corre su `scripts/check-pr.sh` con las ramas, el título y la descripción del PR; esos datos se pasan por el entorno y nunca se interpolan en el *script*

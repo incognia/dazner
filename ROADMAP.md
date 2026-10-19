@@ -1,6 +1,6 @@
 # Hoja de ruta
 
-*Última modificación: 18 de octubre de 2026, 16:03 (CST)*
+*Última modificación: 18 de octubre de 2026, 19:36 (CST)*
 
 DAZNer hoy existe solo para macOS. Esta hoja de ruta describe cómo reorganizar el repositorio y llevar el mismo visor a Windows y a Linux (GTK y Qt), sin perder lo que lo hace útil: ventana sin bordes, proporción fija, dos paneles y pantalla completa dentro de la ventana.
 
@@ -31,7 +31,7 @@ La prueba de reproducción de cada plataforma (el primer grupo de tareas de su c
 | Paso | Qué | Dónde | Depende de |
 |---|---|---|---|
 | 0 | Reorganizar el repositorio (fase 0) | macOS | Hecho |
-| 1a | Extraer el *script* de pantalla completa (`extract-fullscreen-script`, fase 1) | macOS | Nada |
+| 1a | Extraer el *script* de pantalla completa (`extract-fullscreen-script`, fase 1) | macOS | Hecho |
 | 1b | Prueba de reproducción en Windows (`add-windows-port`, grupo 1) | Windows | Nada |
 | 1c | Prueba de reproducción con Qt (`add-linux-qt-port`, grupo 1) | Linux | Nada |
 | 1d | Prueba de reproducción con GTK (`add-linux-gtk-port`, grupo 1) | Linux | Nada |
@@ -74,7 +74,7 @@ DAZNer/
 ├── windows/            (fase 2)
 ├── linux-gtk/          (fase 3a)
 ├── linux-qt/           (fase 3b)
-├── shared/             assets/, scripts/make-icon.swift (y fill-fullscreen.js en la fase 1)
+├── shared/             assets/, scripts/make-icon.swift y fill-fullscreen.js
 ├── README.md           visión general y enlaces por plataforma
 ├── CHANGELOG.md        un solo historial para todo el proyecto
 ├── ROADMAP.md
@@ -91,9 +91,9 @@ Tareas:
 
 Criterio de salida: la app de macOS compila y abre desde `macos/`, y el historial de los archivos movidos sigue visible en GitHub.
 
-## Fase 1: Extraer el *script* de pantalla completa
+## Fase 1: Extraer el *script* de pantalla completa (hecha)
 
-Hoy el *script* que emula la pantalla completa vive como cadena de texto dentro de `DAZNer.swift`. Es la parte más delicada del proyecto (cada comportamiento de DAZN que descubrimos está ahí) y es JavaScript puro, así que sirve en cualquier motor web.
+Antes de esta fase, el *script* que emula la pantalla completa vivía como cadena de texto dentro de `DAZNer.swift`. Es la parte más delicada del proyecto (cada comportamiento de DAZN que descubrimos está ahí) y es JavaScript puro, así que sirve en cualquier motor web.
 
 Tareas:
 
@@ -101,7 +101,7 @@ Tareas:
 - Reemplazar la llamada propia de WebKit para el registro (`webkit.messageHandlers.dbg`) por un gancho neutro, por ejemplo `window.__daznerLog(mensaje)`, que cada plataforma enlaza a su mecanismo.
 - Hacer que macOS lo cargue desde `Contents/Resources` en lugar de tenerlo incrustado.
 
-Criterio de salida: macOS se comporta igual que antes, con el *script* cargado desde `shared/`.
+Criterio de salida: macOS se comporta igual que antes, con el *script* cargado desde `shared/`. Cumplido y verificado en macOS con el modo `--debug`: el botón general del *multiview* con cuatro videos (en sus dos diseños), los botones individuales del video principal y de los secundarios, el partido solo, la pantalla completa dentro de cada uno de los dos paneles y la salida con Esc.
 
 ## Fase 2: Windows
 
