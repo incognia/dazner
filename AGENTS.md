@@ -1,12 +1,12 @@
 # Guía para agentes
 
-*Última modificación: 9 de noviembre de 2026, 00:58 (CST)*
+*Última modificación: 16 de noviembre de 2026, 21:53 (CST)*
 
 Este archivo es para un agente de IA que trabaja en este repositorio, sobre todo si lo clonó en Windows o Linux para construir una de las versiones pendientes. El autor mantiene un repositorio de reglas personales (`rules`) con las *skills* de trabajo (`/commit`, `/changelogger`, `/git-init`, `/licensing`) y sus procedimientos. Está presente en sus máquinas con Linux, en WSL y en Windows, así que **si existe, manda sobre el resumen de este archivo**; este archivo recoge lo esencial por si no está.
 
 ## Qué es DAZNer
 
-Visor mínimo de DAZN (NFL Game Pass): abre el sitio oficial en una ventana sin bordes, con uno o dos paneles y una pantalla completa que llena la ventana o el panel. Hoy existe solo la versión de macOS. Faltan Windows, Linux con Qt y Linux con GTK. Licencia GPLv3; aviso de marcas en `NOTICE.md`.
+Visor mínimo de DAZN (NFL Game Pass): abre el sitio oficial en una ventana sin bordes, con uno o dos paneles y una pantalla completa que llena la ventana o el panel. Hoy existen las versiones de macOS y de Windows. Faltan Linux con Qt y Linux con GTK. Licencia GPLv3; aviso de marcas en `NOTICE.md`.
 
 ## Estructura
 
@@ -17,7 +17,8 @@ openspec/  especificaciones y cambios (el plan de trabajo, ver abajo)
 ROADMAP.md visión general y orden de ejecución
 TODO.md    pendientes por orden y por máquina
 .github/   plantilla de PR, configuración de pr-check y el flujo de GitHub Actions que corre el script de rules
-windows/   (por crear) linux-qt/ (por crear)  linux-gtk/ (por crear)
+windows/   C# sobre WPF y WebView2; DAZNer.sln, build.ps1 y el paquete de la versión de Windows
+linux-qt/ (por crear)  linux-gtk/ (por crear)
 ```
 
 Cada plataforma vive en su carpeta y usa su lenguaje nativo:
@@ -25,7 +26,7 @@ Cada plataforma vive en su carpeta y usa su lenguaje nativo:
 | Plataforma | Lenguaje y herramienta | Motor web |
 |---|---|---|
 | macOS (hecha) | Swift, `swiftc` | WebKit (`WKWebView`) |
-| Windows | C# (.NET) con WPF, `dotnet build` | WebView2 (Chromium) |
+| Windows (hecha) | C# (.NET) con WPF, `dotnet build` | WebView2 (Chromium) |
 | Linux Qt | C++/QML con CMake | Qt WebEngine (Chromium) |
 | Linux GTK | Vala/C con Meson | WebKitGTK 6.0 |
 
@@ -35,7 +36,7 @@ El plan está en `openspec/`. Las especificaciones de `openspec/specs/` describe
 
 | Cambio | Qué hace | Se puede probar en |
 |---|---|---|
-| `add-windows-port` | Versión de Windows | Windows |
+| `add-windows-port` | Versión de Windows (archivado el 16 de noviembre de 2026) | Windows |
 | `add-linux-qt-port` | Versión de Linux con Qt | Linux |
 | `add-linux-gtk-port` | Versión de Linux con GTK (experimental) | Linux |
 
@@ -81,6 +82,8 @@ Esto explica por qué el script de pantalla completa es como es. No lo reinvente
 - **Hueco entre videos:** 4 px de la cuadrícula más 2 px de borde por celda a cada lado, es decir, 8 px entre videos. Se midió de 1280×720 a 2478×1394. Con dos paneles se deja 8 px dentro del ancho de la ventana para conservar la proporción 32:9.
 - **Cambiar el tamaño de la ventana refresca el panel:** DAZN rehace el reproductor. Por eso, al abrir el segundo panel, la ventana cambia primero y el primer panel conserva su tamaño.
 - **La barra gris del borde derecho en pantalla completa** es el panel de estadísticas de DAZN. No es un error.
+- **El *multiview* depende del ancho del panel:** a 956 px o menos DAZN oculta el botón MultiView, y si el panel baja de ese ancho aunque sea un instante, DAZN abandona el *multiview* y deja un solo video. Por eso, al abrir o cerrar el segundo panel, el panel 1 no debe pasar por tamaños intermedios. En WPF, `SetWindowPos` provoca un *layout* inmediato, así que hay que fijar primero la columna del panel 1 en píxeles, cambiar la ventana y devolver la columna a su ancho flexible al final; en macOS los dos cambios caen en una sola pasada de *layout*.
+- **WebView2 inyecta el script antes de que exista `<head>`,** y la aplicación de DAZN retira el `<style>` de `<head>` al montar sus rutas. Por eso la versión de Windows difiere el primer `appendChild` hasta que exista `<head>` y vuelve a insertar el estilo con un `MutationObserver` acotado a `<head>` y `documentElement`, sin modificar el script compartido.
 - Una captura de pantalla de un video con DRM sale en negro en macOS (FairPlay); no sirve para diagnosticar. En Windows con WebView2 (Widevine por *software*) una captura puede no salir negra, pero tampoco prueba que el DRM funcione, porque no distingue un video protegido de uno sin protección. La evidencia que se acepta son fotos de celular en horizontal (ver `CHALLENGE.md`); no se usan videos ni capturadoras de video, porque estas últimas eluden el DRM.
 
 ## Depuración
