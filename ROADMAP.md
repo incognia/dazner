@@ -1,8 +1,8 @@
 # Hoja de ruta
 
-*Última modificación: 15 de noviembre de 2026, 22:45 (CST)*
+*Última modificación: 16 de noviembre de 2026, 21:53 (CST)*
 
-DAZNer hoy existe para macOS y Windows. Esta hoja de ruta describe cómo reorganizar el repositorio y llevar el mismo visor a Windows y a Linux (GTK y Qt), sin perder lo que lo hace útil: ventana sin bordes, proporción fija, dos paneles y pantalla completa dentro de la ventana.
+DAZNer hoy existe para macOS y Windows. Esta hoja de ruta registra cómo se reorganizó el repositorio y se llevó el visor a Windows, y describe cómo llevarlo a Linux (GTK y Qt), sin perder lo que lo hace útil: ventana sin bordes, proporción fija, dos paneles y pantalla completa dentro de la ventana.
 
 El detalle de cada fase (requisitos, diseño y tareas) vive en `openspec/changes/`, y el comportamiento que debe cumplir cada plataforma, en `openspec/specs/`. Esta hoja de ruta es la visión general; las instrucciones para un agente que construya una versión están en `AGENTS.md`.
 
@@ -32,11 +32,11 @@ La prueba de reproducción de cada plataforma (el primer grupo de tareas de su c
 |---|---|---|---|
 | 0 | Reorganizar el repositorio (fase 0) | macOS | Hecho |
 | 1a | Extraer el *script* de pantalla completa (`extract-fullscreen-script`, fase 1) | macOS | Hecho |
-| 1b | Prueba de reproducción en Windows (`add-windows-port`, grupo 1) | Windows | Nada |
+| 1b | Prueba de reproducción en Windows (`add-windows-port`, grupo 1) | Windows | Hecho |
 | 1c | Prueba de reproducción con Qt (`add-linux-qt-port`, grupo 1) | Linux | Nada |
 | 1d | Prueba de reproducción con GTK (`add-linux-gtk-port`, grupo 1) | Linux | Nada |
 | 2 | Decidir con los resultados y anotarlos | Cualquiera | 1b, 1c y 1d |
-| 3 | Terminar la versión de Windows (grupos 2 a 5 de `add-windows-port`) | Windows | 1a, y que 1b pase |
+| 3 | Terminar la versión de Windows (grupos 2 a 5 de `add-windows-port`) | Windows | Hecho |
 | 4 | Terminar la versión con Qt (grupos 2 a 5 de `add-linux-qt-port`) | Linux | 1a, y que 1c pase |
 | 5 | Terminar la versión con GTK (grupos 2 a 5 de `add-linux-gtk-port`) | Linux | 1a, y que 1d pase |
 | 6 | Paridad, empaquetado, CI y publicación (fase 4) | Todas | 3, 4 y 5 |
@@ -103,7 +103,7 @@ Tareas:
 
 Criterio de salida: macOS se comporta igual que antes, con el *script* cargado desde `shared/`. Cumplido y verificado en macOS con el modo `--debug`: el botón general del *multiview* con cuatro videos (en sus dos diseños), los botones individuales del video principal y de los secundarios, el partido solo, la pantalla completa dentro de cada uno de los dos paneles y la salida con Esc.
 
-## Fase 2: Windows
+## Fase 2: Windows (hecha)
 
 - **Motor:** WebView2 (Chromium de Edge).
 - **Lenguaje y interfaz:** C# (.NET) con WPF. Microsoft documenta WebView2 para C# en WPF, WinForms y WinUI 3, y para C/C++ en Win32. Se elige WPF por ser el camino más directo para una ventana sin bordes con dos controles web.
@@ -122,7 +122,7 @@ Funciones y cómo se resuelven:
 | Sesión persistente | Carpeta de datos de usuario de WebView2 |
 | Siempre encima | `Topmost` |
 
-Criterio de salida: paridad con la tabla de funciones, o con las limitaciones documentadas, y un ejecutable que no necesite instalador.
+Criterio de salida: paridad con la tabla de funciones, o con las limitaciones documentadas, y un ejecutable que no necesite instalador. Cumplido: las 18 tareas de `add-windows-port` quedaron verificadas, con compilación mediante `windows/build.ps1` en Windows PowerShell 5.1 y en PowerShell 7. El cambio está archivado en `openspec/changes/archive/` y su especificación, en `openspec/specs/platform-windows/`.
 
 ## Fase 3: Linux
 
