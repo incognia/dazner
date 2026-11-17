@@ -1,6 +1,6 @@
 # Reto de contribución
 
-*Última modificación: 7 de noviembre de 2026, 15:30 (CST)*
+*Última modificación: 16 de noviembre de 2026, 21:54 (CST)*
 
 Este documento describe un reto abierto para quien quiera demostrar cómo trabaja con inteligencia artificial en un proyecto real: construir una de las versiones pendientes de DAZNer con **desarrollo guiado por especificaciones** (*spec-driven development*, SDD) y no con *vibe coding*. Sirve para cualquier persona y cualquier herramienta de IA. El mantenedor usa este mismo documento para probar el flujo de *pull requests* del proyecto.
 
@@ -19,7 +19,7 @@ Que el resultado sale de un proceso controlado y no de la suerte:
 3. **Usa las reglas del proyecto.** Haz un *fork* de [incognia/rules](https://github.com/incognia/rules) y aplica sus procedimientos de `/changelogger` y `/commit`, con sus CoT y *rulesets*. Si tu herramienta no carga *skills*, los CoT son Markdown y puedes pasárselos como instrucciones. Úsalos con tu propio entorno e identidad: el mantenedor revisa el resultado, no la herramienta.
 4. **Todo entra por *pull request*,** nunca por *push* directo a `main`, y con la plantilla de [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md) completa.
 5. **Prohibido:** eludir el DRM, los controles de acceso o los límites de reproducción de DAZN; redistribuir módulos de DRM; guardar credenciales en archivos, registros o *commits*; marcar una tarea como hecha sin haberla ejecutado.
-6. **Una cuenta de GitHub por persona.** Participa con una sola cuenta, que es solo tuya, y no uses otra para el mismo reto. El mantenedor no puede comprobar que una cuenta sea una sola persona, así que lo pide como declaración: en la sección «Decisiones» del PR escribe que la cuenta es solo tuya y que no participas con otra. Faltar a esa declaración cuenta como falta de honestidad. Si trabajas en equipo sobre una misma solución, declara en el PR quiénes participaron; el mantenedor lo evalúa como una sola entrega.
+6. **Una cuenta de GitHub por persona.** Participa con una sola cuenta, que es solo tuya, y no uses otra para el mismo reto. El mantenedor no puede comprobar que una cuenta sea una sola persona, así que lo pide como declaración: en la sección «Decisiones» del PR escribe que la cuenta es solo tuya y que no participas con otra. Participar con más de una cuenta a propósito y ocultarlo cuenta como falta de honestidad; olvidar la declaración se corrige en el PR sin más. La regla se refiere a la cuenta de GitHub, no a las cuentas de las herramientas de IA que uses. Si trabajas en equipo sobre una misma solución, declara en el PR quiénes participaron; el mantenedor lo evalúa como una sola entrega.
 
 Lee antes [AGENTS.md](AGENTS.md): resume la estructura, las decisiones ya tomadas y lo descubierto sobre DAZN.
 

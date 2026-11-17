@@ -1,6 +1,6 @@
 # Segunda revisión del reto: Punqee
 
-*Última modificación: 9 de noviembre de 2026, 00:31 (CST)*
+*Última modificación: 16 de noviembre de 2026, 21:54 (CST)*
 
 Segunda revisión de la entrega de Míriam ([@Punqee](https://github.com/Punqee)) al [reto de contribución](../CHALLENGE.md), hecha por el mantenedor con Claude Code (Opus 5.5) en una máquina con Windows. Revisa la rama que reescribió después de la [primera revisión](../score/punqee.md): qué atendió, qué se ejecutó y qué falta.
 
@@ -88,7 +88,7 @@ Todo se atiende como indica la primera revisión: primero `design.md` y `tasks.m
 
 ## Calificación
 
-La calificación de la [primera revisión](../score/punqee.md) se refiere a la entrega tal como se presentó entonces y no cambia. Esta revisión registra el avance; la decisión sobre la nueva calificación queda a cargo del mantenedor.
+La calificación de la [primera revisión](../score/punqee.md) se refiere a la entrega tal como se presentó entonces; su honestidad se ajustó a 10 y el total quedó en 6.6, porque lo que se afirmó de más fueron descuidos y no mentiras. Esta revisión registra el avance; la decisión sobre la nueva calificación queda a cargo del mantenedor.
 
 ## Veredicto
 
